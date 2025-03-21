@@ -14,7 +14,7 @@ abstract class IceCreamComponent extends JPanel {
 
     public IceCreamComponent(String bgPath) {
         this.backgroundPath = bgPath;
-        this.backgroundChangeMessage = "Background changed to: " + bgPath; // Store message
+        this.backgroundChangeMessage = "Background changed to: " + bgPath; // Initialize message
         loadImage();
     }
 
@@ -40,10 +40,10 @@ abstract class IceCreamComponent extends JPanel {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
 
-        // Draw the background change message
-        g.setColor(Color.WHITE); // Ensure text is visible
-        g.setFont(new Font("Arial", Font.BOLD, 20)); // Bigger font
-        g.drawString(backgroundChangeMessage, 10, 30); // Position message at the top
+        // Draw the evolving background change message
+        g.setColor(Color.BLACK); // Ensure text is visible
+        g.setFont(new Font("Arial", Font.BOLD, 18)); // Bigger font
+        g.drawString(backgroundChangeMessage, 10, 30); // Keep message at the top
     }
 
     public String getComponentDescription() {
@@ -59,6 +59,7 @@ class IceCreamBowl extends IceCreamComponent {
     public IceCreamBowl(String bgPath) {
         super(bgPath);
         this.componentDescription = "Ice Cream Bowl";
+        this.backgroundChangeMessage += " | Added Bowl"; // Append to the message
     }
 
     @Override
@@ -77,7 +78,7 @@ class IceCreamBowl extends IceCreamComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (showBowl && bowlImage != null) {
-            g.drawImage(bowlImage, 10, 70, 220, 220, this); // Moved downward
+            g.drawImage(bowlImage, 10, 80, 220, 220, this); // Moved downward
         }
     }
 }
@@ -89,6 +90,7 @@ class IceCreamWithScoop extends IceCreamBowl {
     public IceCreamWithScoop(String bgPath) {
         super(bgPath);
         this.componentDescription = "Ice Cream Scoop";
+        this.backgroundChangeMessage += " | Added Scoop"; // Append to the message
     }
 
     @Override
@@ -105,7 +107,7 @@ class IceCreamWithScoop extends IceCreamBowl {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (iceCreamImage != null) {
-            g.drawImage(iceCreamImage, 10, 90, 220, 220, this); // Moved downward
+            g.drawImage(iceCreamImage, 10, 100, 220, 220, this); // Moved downward
         }
     }
 }
@@ -117,6 +119,7 @@ class IceCreamWithSyrup extends IceCreamWithScoop {
     public IceCreamWithSyrup(String bgPath) {
         super(bgPath);
         this.componentDescription = "Ice Cream with Syrup";
+        this.backgroundChangeMessage += " | Added Syrup"; // Append to the message
     }
 
     @Override
@@ -133,7 +136,7 @@ class IceCreamWithSyrup extends IceCreamWithScoop {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (syrupImage != null) {
-            g.drawImage(syrupImage, 10, 90, 220, 220, this); // Moved downward
+            g.drawImage(syrupImage, 10, 100, 220, 220, this); // Moved downward
         }
     }
 }
@@ -144,7 +147,7 @@ public class IceCreamGUI {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Ice Cream Display");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(264, 320); // Increased height to accommodate text
+            frame.setSize(280, 340); // Increased height to accommodate text
 
             // Randomly choose a background
             String[] backgrounds = {"background1.png", "background2.png"};
